@@ -20,7 +20,7 @@ public class mainTrucho {
 
             if(precio < 0){
                 System.out.println("El juego " + tituloIngresado + " no esta en la base de datos");
-            }else System.out.println("El precio de " + tituloIngresado + " es " + precio);
+            }else System.out.println("El precio de " + tituloIngresado + " es $" + precio);
         }
     }
 
