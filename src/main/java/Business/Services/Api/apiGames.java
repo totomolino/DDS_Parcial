@@ -44,15 +44,26 @@ public class apiGames {
     }
 
     public float damePrecio(String titulo) throws IOException {
+        float respuesta;
         //Busco la lista de juegos aproximada
         List<game> juegosAproximados = this.dameJuegos(titulo);
         //game juego = (game) juegosAproximados.stream().filter(game -> this.buscarGame(game,titulo));
-        game juego = juegosAproximados.stream().filter(game-> this.buscarGame(game,titulo)).collect(Collectors.toList()).get(0);
-        return Float.parseFloat(juego.getPrecio());
+        if(juegosAproximados.isEmpty()){
+            respuesta = -1;
+        }else {
+            List<game> listaJuego = juegosAproximados.stream().filter(game -> this.buscarGame(game, titulo)).collect(Collectors.toList());
+            if(listaJuego.isEmpty()){
+                respuesta = -2;
+            }else {
+                game juego = listaJuego.get(0);
+                respuesta = Float.parseFloat(juego.getPrecio());
+            }
+        }
+        return respuesta;
     }
 
     private boolean buscarGame(game game, String titulo) {
-        return titulo.equals(game.getInternalName()) || titulo.equals(game.getExternal());
+        return titulo.equalsIgnoreCase(game.getInternalName()) || titulo.equalsIgnoreCase(game.getExternal());
     }
 
 

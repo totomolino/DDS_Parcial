@@ -12,14 +12,16 @@ public class mainTrucho {
         apiGames api = apiGames.getInstacia();
 
         Scanner sc = new Scanner(System.in);
+        while(true) {
+            System.out.println("Ingrese el titulo que quiere: ");
+            String tituloIngresado = sc.nextLine();
 
-        System.out.println("Ingrese el titulo que quiere: ");
-        String tituloIngresado = sc.nextLine();
+            float precio = api.damePrecio(tituloIngresado);
 
-        float precio = api.damePrecio(tituloIngresado);
-
-        System.out.println("El precio de " + tituloIngresado + " es " + precio);
-
+            if(precio < 0){
+                System.out.println("El juego " + tituloIngresado + " no esta en la base de datos");
+            }else System.out.println("El precio de " + tituloIngresado + " es " + precio);
+        }
     }
 
 
