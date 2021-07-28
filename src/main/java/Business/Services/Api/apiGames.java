@@ -33,7 +33,7 @@ public class apiGames {
 
     }
 
-    public List<game>
+    //public List<game>
 
 
 

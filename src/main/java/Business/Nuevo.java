@@ -1,4 +1,4 @@
 package Business;
 
-public class Algo {
+public class Nuevo {
 }
