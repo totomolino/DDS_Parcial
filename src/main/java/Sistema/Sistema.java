@@ -8,7 +8,7 @@ import java.util.List;
 
 public class Sistema {
 
-    private static Sistema instancia;
+    private static Sistema instancia = null;
     List<JuegoSimple> juegos;
     List<Usuario> usuarios;
 

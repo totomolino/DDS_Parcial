@@ -10,4 +10,16 @@ public class game {
     public String internalName;
     public String thumb;
 
+
+    public String getInternalName() {
+        return internalName;
+    }
+
+    public String getExternal() {
+        return external;
+    }
+
+    public String getPrecio() {
+        return cheapest;
+    }
 }

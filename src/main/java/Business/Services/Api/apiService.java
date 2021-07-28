@@ -10,8 +10,8 @@ import retrofit2.http.Query;
 
 public interface apiService {
 
-    @GET("")
-    Call<ListaJuegos> juegos();
+    @GET("games")
+    Call<ListaJuegos> juegos(@Query("title") String titulo);
 
 
 }
