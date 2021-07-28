@@ -9,6 +9,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 import java.io.IOException;
 import java.util.List;
+import java.util.stream.Collectors;
 
 
 public class apiGames {
@@ -35,17 +36,18 @@ public class apiGames {
 
     public List<game> dameJuegos(String titulo) throws IOException {
         apiService juegosService = this.retrofit.create(apiService.class);
-        Call<ListaJuegos> requestJuegos = juegosService.juegos(titulo);
-        Response<ListaJuegos> responseJuegos = requestJuegos.execute();
+        Call<List<game>> requestJuegos = juegosService.juegos(titulo);
+        Response<List<game>> responseJuegos = requestJuegos.execute();
 
-        return responseJuegos.body().listaDeJuegos;
+        return responseJuegos.body();
 
     }
 
     public float damePrecio(String titulo) throws IOException {
         //Busco la lista de juegos aproximada
         List<game> juegosAproximados = this.dameJuegos(titulo);
-        game juego = (game) juegosAproximados.stream().filter(game -> this.buscarGame(game,titulo));
+        //game juego = (game) juegosAproximados.stream().filter(game -> this.buscarGame(game,titulo));
+        game juego = juegosAproximados.stream().filter(game-> this.buscarGame(game,titulo)).collect(Collectors.toList()).get(0);
         return Float.parseFloat(juego.getPrecio());
     }
 
