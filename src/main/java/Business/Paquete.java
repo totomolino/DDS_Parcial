@@ -1,12 +1,11 @@
 package Business;
 
 import java.util.List;
-import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-public class Paquete extends component {
+public class Paquete extends Component {
 
-    List<component> juegos;
+    List<Component> juegos;
 
     @Override
     public double calcularPrecio() {
@@ -28,4 +27,9 @@ public class Paquete extends component {
     public void serRetrasado() {
         juegos.forEach(component -> component.serRetrasado());
     }
+
+    public void add(Component unComponente){
+        juegos.add(unComponente);
+    }
+
 }

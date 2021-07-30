@@ -1,6 +1,6 @@
 package Business;
 
-public class JuegoSimple extends component {
+public class JuegoSimple extends Component {
 
     String titulo;
     Estado estado;
@@ -16,6 +16,7 @@ public class JuegoSimple extends component {
         this.cantUsos = 0;//0 usos
     }
 
+    @Override
     public double calcularPrecio(){
         return condicion.pagar();
     }

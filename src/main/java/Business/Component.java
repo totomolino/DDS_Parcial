@@ -1,6 +1,6 @@
 package Business;
 
-public abstract class component {
+public abstract class Component {
 
     public abstract double calcularPrecio();
 
