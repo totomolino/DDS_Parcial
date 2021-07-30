@@ -1,6 +1,6 @@
 package Business;
 
-public class JuegoSimple {
+public class JuegoSimple extends component {
 
     String titulo;
     Estado estado;
@@ -20,10 +20,28 @@ public class JuegoSimple {
         return condicion.pagar();
     }
 
+    @Override
+    public void serAlquilado() {
+        cambiarEstado(Estado.PRESTADO);
+    }
+
+    @Override
+    public void serDevuelto() {
+        cambiarEstado(Estado.STOCK);
+    }
+
+    @Override
+    public void serRetrasado() {
+        cambiarEstado(Estado.RETRASADO);
+    }
+
     public void cambiarCondicion(Condicion condicion){
         this.condicion = condicion;
     }
 
+    public void cambiarEstado(Estado estado){
+        this.estado = estado;
+    }
 
     public void usar() {
         this.cantUsos += 1;
