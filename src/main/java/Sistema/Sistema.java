@@ -36,9 +36,7 @@ public class Sistema {
         }
     }
 
-    private static Usuario buscarUsuario(String usuarioOEmail) {
-        return usuarios.stream().filter(usuario -> usuario.mismoUsuarioOEmail(usuarioOEmail)).collect(Collectors.toList()).get(0);
-    }
+
 
     public boolean validarContrasenia(String contrasenia, String usuario){
         return Register.validarContrasenia(contrasenia, usuario);
@@ -93,5 +91,9 @@ public class Sistema {
 
     private static Cliente buscarClienteConUsuario(Usuario unUsuario) {
         return clientes.stream().filter(cliente -> cliente.tieneUsuario(unUsuario)).collect(Collectors.toList()).get(0);
+    }
+
+    private static Usuario buscarUsuario(String usuarioOEmail) {
+        return usuarios.stream().filter(usuario -> usuario.mismoUsuarioOEmail(usuarioOEmail)).collect(Collectors.toList()).get(0);
     }
 }

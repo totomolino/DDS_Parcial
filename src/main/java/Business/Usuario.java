@@ -27,7 +27,7 @@ public class Usuario {
     }
 
     public boolean mismoUsuarioOEmail(String usuarioOEmail) {
-        return nombreUsuario.equalsIgnoreCase(usuarioOEmail) || email.equalsIgnoreCase(usuarioOEmail);
+        return nombreUsuario.equals(usuarioOEmail) || email.equals(usuarioOEmail);
     }
 
     public boolean verificarContrasenia(String otraContrasenia) {
