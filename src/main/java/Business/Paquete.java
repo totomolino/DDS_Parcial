@@ -29,6 +29,11 @@ public class Paquete extends Component {
         juegos.forEach(component -> component.serRetrasado());
     }
 
+    @Override
+    public String mostrar() {
+        return juegos.forEach(component -> component.mostrar());
+    }
+
     public void add(Component unComponente){
         juegos.add(unComponente);
     }

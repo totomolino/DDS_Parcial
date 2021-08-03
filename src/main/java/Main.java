@@ -25,9 +25,10 @@ public class Main {
 
        SimpleTrigger trigger =  newTrigger().withIdentity("trigger1")
                 .startNow()
-                //.withSchedule(simpleSchedule().withIntervalInHours(24).repeatForever())
-                .withSchedule(simpleSchedule().withIntervalInSeconds(15).repeatForever())
+                .withSchedule(simpleSchedule().withIntervalInHours(24).repeatForever())
                 .build();
+                //.withSchedule(simpleSchedule().withIntervalInHours(24).repeatForever())
+                //.withSchedule(simpleSchedule().withIntervalInSeconds(15).repeatForever())
 
         scheduler.scheduleJob(job, trigger);
 

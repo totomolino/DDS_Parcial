@@ -10,4 +10,6 @@ public abstract class Component {
 
     public abstract void serRetrasado();
 
+    public abstract String mostrar();
+
 }

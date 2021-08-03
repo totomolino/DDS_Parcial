@@ -31,7 +31,7 @@ public class Cliente {
 
     public void notificarDevolucion(Alquiler unAlquiler){
 
-        String mensaje = "Mañana " + unAlquiler.getFechaDeDevolucion() + " tienes que devolver los juegos " + unAlquiler.juegosAlquilados + ", Saludos!! :)";
+        String mensaje = "Mañana " + unAlquiler.getFechaDeDevolucion() + " tienes que devolver los juegos ") + unAlquiler.mostrarJuegosAlquilados() + ", Saludos!! :)";
 
         this.serNotificado(mensaje);
 

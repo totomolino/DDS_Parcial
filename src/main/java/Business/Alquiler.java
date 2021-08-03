@@ -1,6 +1,7 @@
 package Business;
 
 import java.time.LocalDate;
+import java.util.List;
 
 public class Alquiler {
     LocalDate fechaDeRetiro;
@@ -20,5 +21,9 @@ public class Alquiler {
 
     public boolean faltaUnDia() {
         return LocalDate.now().plusDays(1).equals(fechaDeDevolucion);
+    }
+
+    public String mostrarJuegosAlquilados() {
+        List<String> titulos = juegosAlquilados.mostrar();
     }
 }

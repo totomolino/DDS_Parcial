@@ -36,6 +36,11 @@ public class JuegoSimple extends Component {
         cambiarEstado(Estado.RETRASADO);
     }
 
+    @Override
+    public String mostrar() {
+        return titulo;
+    }
+
     public void cambiarCondicion(Condicion condicion){
         this.condicion = condicion;
     }
