@@ -2,6 +2,6 @@ package Notificaciones;
 
 public abstract class notificarStrategy {
 
-    public abstract void notificarA(String email, String telefono);
+    public abstract void notificarA(String mensaje, String email, String telefono);
 
 }

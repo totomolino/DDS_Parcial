@@ -21,10 +21,10 @@ public class Cliente {
         this.formaNotificacion = formaNotificacion;
     }
 
-    public void serNotificado() {
+    public void serNotificado(String mensaje) {
 
         for (int i = 0; i < formaNotificacion.size(); i++) {
-            formaNotificacion.get(i).notificarA(usuario.email, telefono);
+            formaNotificacion.get(i).notificarA(mensaje, usuario.email, telefono);
         }
     }
 
