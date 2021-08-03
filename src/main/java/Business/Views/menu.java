@@ -101,7 +101,7 @@ public class menu {
                 switch (opcion) {
 
                     case 1:
-                        this.alquilarJuegos();
+                        this.alquilarJuegos(); //Todo falta agrerar el alquiler al cliente
                         break;
                     case 2:
                         clienteIniciado = null;

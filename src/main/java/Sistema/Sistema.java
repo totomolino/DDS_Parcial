@@ -3,6 +3,10 @@ package Sistema;
 import Business.*;
 import Notificaciones.notificarStrategy;
 import Seguridad.Register;
+import org.quartz.Scheduler;
+import org.quartz.SchedulerException;
+import org.quartz.SchedulerFactory;
+import org.quartz.impl.StdSchedulerFactory;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -100,6 +104,8 @@ public class Sistema {
     }
 
     private static Usuario buscarUsuario(String usuarioOEmail) {
-        return usuarios.stream().filter(usuario -> usuario.mismoUsuarioOEmail(usuarioOEmail)).collect(Collectors.toList()).get(0);
+        List<Usuario> lista = usuarios.stream().filter(usuario -> usuario.mismoUsuarioOEmail(usuarioOEmail)).collect(Collectors.toList());
+        if(lista.isEmpty())return null;
+        else return lista.get(0);
     }
 }
