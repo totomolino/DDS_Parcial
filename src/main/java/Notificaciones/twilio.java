@@ -10,11 +10,11 @@ public class twilio {
     public static final String ACCOUNT_SID = System.getenv("TWILIO_ACCOUNT_SID");
     public static final String AUTH_TOKEN = System.getenv("TWILIO_AUTH_TOKEN");
 
-    public static void main(String[] args) {
+   /* public static void main(String[] args) {
         twilio.mandarSMS("+541166070996", "TE RETRASASTE PAPU");//con sms es sin el 9
         twilio.mandarWhatsapp("+5491166070996", "TE RETRASASTE PAPU");//con warap es 54 911
     }
-
+*/
 
     public static void mandarSMS(String telefono, String mensaje){
 

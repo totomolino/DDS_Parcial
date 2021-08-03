@@ -16,22 +16,77 @@ import java.util.Scanner;
 
 public class menu {
     Usuario usuario;
-    Cliente clienteIniciado;
-    public void iniciarMenu() throws IOException {
+    Cliente clienteIniciado = null;
+    Sistema miSistema = Sistema.getInstance();
 
+
+    public void iniciarMenu() {
         Scanner sn = new Scanner(System.in);
         Scanner str = new Scanner(System.in);
         boolean salir = false;
         int opcion; //Guardaremos la opcion del usuario
         String respuestaCompleja;   // Guardaremos la respuesta compleja del usuario
-        Sistema miSistema = Sistema.getInstance();
+
+
+        while (!salir) {
+            if(clienteIniciado != null){
+                menuConSesion();
+                salir=true;
+                break;
+            }
+
+            System.out.println("1. crear usuario");
+            System.out.println("2. iniciar sesion");
+            System.out.println("3. mostrar usuarios");
+            System.out.println("99. Salir");
+
+
+            try {
+
+                System.out.println("Escribe una de las opciones");
+                opcion = sn.nextInt();
+
+                switch (opcion) {
+                    case 1:
+                        this.crearUsuario();
+                        break;
+                    case 2:
+                        clienteIniciado = this.iniciarSesion();
+                        break;
+                    case 3:
+                        miSistema.mostrarUsuarios();
+                        break;
+                    case 99:
+                        salir = true;
+                        break;
+                    default:
+                        System.out.println("Solo números entre 1 y 3");
+                }
+            } catch (InputMismatchException e) {
+                System.out.println("Debes insertar un número");
+                sn.next();
+            }
+        }
+        System.out.println("Finalizado con exito! Nos vemos broustoun!");
+
+
+    }
+
+
+    public void menuConSesion(){
+        Scanner sn = new Scanner(System.in);
+        Scanner str = new Scanner(System.in);
+        boolean salir = false;
+        int opcion; //Guardaremos la opcion del usuario
+        String respuestaCompleja;   // Guardaremos la respuesta compleja del usuario
+
 
         while (!salir) {
 
+            //System.out.println("1. alquilar juegos");
             System.out.println("1. alquilar juegos");
-            System.out.println("2. crear usuario");
-            System.out.println("3. iniciar sesion");
-            System.out.println("4. mostrar usuarios");
+            System.out.println("2. cerrar sesion");
+            System.out.println("3. mostrar usuarios");
             System.out.println("99. Salir");
 
 
@@ -46,12 +101,11 @@ public class menu {
 
                         break;
                     case 2:
-                        this.crearUsuario(miSistema);
+                        clienteIniciado = null;
+                        System.out.println("Se ha cerrado la sesion correctamente");
+                        iniciarMenu();
                         break;
                     case 3:
-                        clienteIniciado = this.iniciarSesion(miSistema);
-                        break;
-                    case 4:
                         Sistema.mostrarUsuarios();
                         break;
                     case 99:
@@ -65,11 +119,13 @@ public class menu {
                 sn.next();
             }
         }
-        System.out.println("Finalizado con exito! Nos vemos broustoun!");
+       //System.out.println("Finalizado con exito! Nos vemos broustoun!");
+
     }
 
 
-    public void crearUsuario(Sistema miSistema){
+
+    public void crearUsuario(){
         Scanner str = new Scanner(System.in);
         System.out.println("Has seleccionado Crear Usuario");
         System.out.println("Ingrese Usuario");
@@ -91,12 +147,12 @@ public class menu {
             contrasenaProvisoria = str.nextLine();
         }
         Usuario unUsuario = miSistema.crearUsuario(usuarioProvisorio, contrasenaProvisoria, mailUsuario);
-        this.pedirDatosExtra(unUsuario, miSistema);
+        this.pedirDatosExtra(unUsuario);
         System.out.println("Usuario creado exitosamente!!");
     }
 
 
-    public Cliente iniciarSesion(Sistema miSistema){//todo podria devolver el usuario para saber cual esta iniciado ahora mismo o nose al cliente
+    public Cliente iniciarSesion(){//todo podria devolver el usuario para saber cual esta iniciado ahora mismo o nose al cliente
         boolean success = false;
         Cliente unCliente = null;
         while(!success){
@@ -122,7 +178,7 @@ public class menu {
         return unCliente;
     }
 
-    public void pedirDatosExtra(Usuario usuario, Sistema miSistema){
+    public void pedirDatosExtra(Usuario usuario){
         Scanner str = new Scanner(System.in);
         System.out.println("Ingrese su nombre");
         String nombre = str.nextLine();
