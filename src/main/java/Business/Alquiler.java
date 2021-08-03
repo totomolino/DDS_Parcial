@@ -14,6 +14,7 @@ public class Alquiler {
     }
 
 
-
-
+    public LocalDate getFechaDeEntrega() {
+        return fechaDeEntrega;
+    }
 }

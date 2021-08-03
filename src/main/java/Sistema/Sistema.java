@@ -43,8 +43,12 @@ public class Sistema {
         return Register.validarContrasenia(contrasenia, usuario);
     }
 
-    public List<JuegoSimple> mostrarJuegosDisponibles(){//Pide a la BD los juegos disponibles y los guarda en una lista para mostrar despues
-        List<JuegoSimple>juegos = new ArrayList<>();
+    public List<String> mostrarJuegosDisponibles(){//Pide a la BD los juegos disponibles y los guarda en una lista para mostrar despues
+        List<String>juegos = new ArrayList<>();
+        juegos.add("MARVELSAVENGERS");
+        juegos.add("BATTLEFIELD4");
+        juegos.add("FIFA22");
+        juegos.add("FIFA21");
         return juegos;
     }
 

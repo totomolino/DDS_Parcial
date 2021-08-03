@@ -1,5 +1,6 @@
 package Business.Views;
 
+import Business.Alquiler;
 import Business.Cliente;
 import Business.JuegoSimple;
 import Business.Usuario;
@@ -10,10 +11,8 @@ import Notificaciones.notificarStrategy;
 import Sistema.Sistema;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.InputMismatchException;
-import java.util.List;
-import java.util.Scanner;
+import java.util.*;
+import java.util.stream.Collectors;
 
 public class menu {
     Usuario usuario;
@@ -35,7 +34,7 @@ public class menu {
                 salir=true;
                 break;
             }
-
+            System.out.println("-----------------------------------------");
             System.out.println("1. crear usuario");
             System.out.println("2. iniciar sesion");
             System.out.println("3. mostrar usuarios");
@@ -56,6 +55,9 @@ public class menu {
                         break;
                     case 3:
                         miSistema.mostrarUsuarios();
+                        break;
+                    case 4:
+                        this.alquilarJuegos();
                         break;
                     case 99:
                         salir = true;
@@ -125,10 +127,27 @@ public class menu {
     }
 
     private void alquilarJuegos() {
+        Scanner str = new Scanner(System.in);
         System.out.println("Has seleccionado alquilar juegos");
-        List<JuegoSimple> juegosDisponibles = miSistema.mostrarJuegosDisponibles();
-
-
+        List<String> juegosDisponibles = miSistema.mostrarJuegosDisponibles();
+        int contador = 1;
+        System.out.println("Los juegos disponibles son: ");
+        for(int i = 0; i< juegosDisponibles.size(); i++){
+            System.out.println(contador + "- " + juegosDisponibles.get(i));
+            contador++;
+        }
+        System.out.println("Ingrese el indice de el/los juegos que desee alquilar: (si quiere mas de uno, poner los numeros separados por una coma)");
+        String respuesta = str.nextLine();
+        List<String>juegos = Arrays.asList(respuesta.split(","));
+        int finalContador = contador - 1;
+        List<String>juegosFiltrados = juegos.stream().filter(num -> Integer.parseInt(num) <= finalContador).collect(Collectors.toList());//Para evitar errores
+        List<String>titulos = new ArrayList<>();
+        juegosFiltrados.forEach(indice -> titulos.add(juegosDisponibles.get(Integer.parseInt(indice)-1)));
+        System.out.println("Cuantos dias quiere alquilar? ");
+        String dias = str.nextLine();
+        Alquiler unAlquiler = miSistema.crearAlquiler(titulos,Integer.parseInt(dias));
+        //titulos.forEach(juego -> System.out.println(juego));
+        System.out.println("Usted ha alquilado el/los juego/s " + titulos + ", tiene que devolverlos el dia " + unAlquiler.getFechaDeEntrega() + " ,Gracias por elegirnos!!");
 
     }
 

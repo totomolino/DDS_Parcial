@@ -1,11 +1,12 @@
 package Business;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Stream;
 
 public class Paquete extends Component {
 
-    List<Component> juegos;
+    List<Component> juegos = new ArrayList<>();
 
     @Override
     public double calcularPrecio() {
