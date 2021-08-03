@@ -4,6 +4,7 @@ import Business.*;
 import Notificaciones.notificarStrategy;
 import Seguridad.Register;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -42,8 +43,9 @@ public class Sistema {
         return Register.validarContrasenia(contrasenia, usuario);
     }
 
-    public void mostrarJuegosDisponibles(){//Pide a la BD los juegos disponibles y los muestra
-
+    public List<JuegoSimple> mostrarJuegosDisponibles(){//Pide a la BD los juegos disponibles y los guarda en una lista para mostrar despues
+        List<JuegoSimple>juegos = new ArrayList<>();
+        return juegos;
     }
 
     public Usuario crearUsuario(String nombre, String contrasenia, String email){
@@ -52,7 +54,7 @@ public class Sistema {
         return unUsuario;
     }
 
-    public Alquiler crearAlquiler(List<String>juegosTitulos){
+    public Alquiler crearAlquiler(List<String>juegosTitulos, int cantDias){
         Component componente;
         if(juegosTitulos.size() == 1){ //Si cargo un solo juego
             componente = new JuegoSimple(juegosTitulos.get(0), Estado.PRESTADO);
@@ -60,7 +62,7 @@ public class Sistema {
             componente = new Paquete();
             juegosTitulos.forEach(juego -> ((Paquete) componente).add(new JuegoSimple(juego,Estado.PRESTADO)));
         }
-        Alquiler unAlquiler = new Alquiler("hoy", "maniana", componente);
+        Alquiler unAlquiler = new Alquiler(LocalDate.now(), LocalDate.now().plusDays(cantDias), componente);
 
         return unAlquiler;
     }

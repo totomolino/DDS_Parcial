@@ -1,11 +1,13 @@
 package Business;
 
+import java.time.LocalDate;
+
 public class Alquiler {
-    String fechaDeRetiro;
-    String fechaDeEntrega;
+    LocalDate fechaDeRetiro;
+    LocalDate fechaDeEntrega;
     Component juegosAlquilados;
 
-    public Alquiler(String fechaDeRetiro, String fechaDeEntrega, Component juegosAlquilados) {
+    public Alquiler(LocalDate fechaDeRetiro, LocalDate fechaDeEntrega, Component juegosAlquilados) {
         this.fechaDeRetiro = fechaDeRetiro;
         this.fechaDeEntrega = fechaDeEntrega;
         this.juegosAlquilados = juegosAlquilados;

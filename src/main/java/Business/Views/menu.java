@@ -1,6 +1,7 @@
 package Business.Views;
 
 import Business.Cliente;
+import Business.JuegoSimple;
 import Business.Usuario;
 import Notificaciones.EMAIL;
 import Notificaciones.SMS;
@@ -98,7 +99,7 @@ public class menu {
                 switch (opcion) {
 
                     case 1:
-
+                        this.alquilarJuegos();
                         break;
                     case 2:
                         clienteIniciado = null;
@@ -123,9 +124,16 @@ public class menu {
 
     }
 
+    private void alquilarJuegos() {
+        System.out.println("Has seleccionado alquilar juegos");
+        List<JuegoSimple> juegosDisponibles = miSistema.mostrarJuegosDisponibles();
 
 
-    public void crearUsuario(){
+
+    }
+
+
+    private void crearUsuario(){
         Scanner str = new Scanner(System.in);
         System.out.println("Has seleccionado Crear Usuario");
         System.out.println("Ingrese Usuario");
@@ -152,7 +160,7 @@ public class menu {
     }
 
 
-    public Cliente iniciarSesion(){//todo podria devolver el usuario para saber cual esta iniciado ahora mismo o nose al cliente
+    private Cliente iniciarSesion(){//todo podria devolver el usuario para saber cual esta iniciado ahora mismo o nose al cliente
         boolean success = false;
         Cliente unCliente = null;
         while(!success){
@@ -178,7 +186,7 @@ public class menu {
         return unCliente;
     }
 
-    public void pedirDatosExtra(Usuario usuario){
+    private void pedirDatosExtra(Usuario usuario){
         Scanner str = new Scanner(System.in);
         System.out.println("Ingrese su nombre");
         String nombre = str.nextLine();
