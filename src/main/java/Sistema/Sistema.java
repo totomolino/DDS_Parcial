@@ -1,6 +1,7 @@
 package Sistema;
 
 import Business.*;
+import Notificaciones.SMS;
 import Notificaciones.notificarStrategy;
 import Seguridad.Register;
 import org.quartz.Scheduler;
@@ -8,8 +9,10 @@ import org.quartz.SchedulerException;
 import org.quartz.SchedulerFactory;
 import org.quartz.impl.StdSchedulerFactory;
 
+import java.lang.reflect.Array;
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -17,8 +20,14 @@ public class Sistema {
 
     private static Sistema instancia = null;
     public static List<JuegoSimple> juegos;
-    public static List<Usuario> usuarios = new ArrayList<>();
-    public static List<Cliente> clientes = new ArrayList<Cliente>();
+   // public static List<Usuario> usuarios = new ArrayList<>();
+   // public static List<Cliente> clientes = new ArrayList<Cliente>();
+    public static Usuario totoUser = new Usuario("totomolino","Totoeslaonda12", "totomolino@hotmail.com");
+    static List<notificarStrategy>medios = Arrays.asList(new SMS());
+    public static Cliente toto = new Cliente("tomas", "Molino", totoUser, "+541166070996", medios);
+    public static List<Usuario> usuarios = Arrays.asList(totoUser);
+    public static List<Cliente> clientes = Arrays.asList(toto);
+
 
     //SINGLETON
 
@@ -107,5 +116,16 @@ public class Sistema {
         List<Usuario> lista = usuarios.stream().filter(usuario -> usuario.mismoUsuarioOEmail(usuarioOEmail)).collect(Collectors.toList());
         if(lista.isEmpty())return null;
         else return lista.get(0);
+    }
+
+    public void avisarFechaDevolucion() {
+
+        //Primero filtro los que estan a un dia de la fecha
+
+        List<Cliente> clientesPorDevolver = clientes.stream().filter(cliente -> cliente.tieneQueDevolver()).collect(Collectors.toList());
+
+        clientesPorDevolver.forEach(cliente -> cliente.avisarDevolucion());
+
+
     }
 }

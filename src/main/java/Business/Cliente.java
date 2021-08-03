@@ -4,6 +4,7 @@ import Notificaciones.notificarStrategy;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class Cliente {
     String nombre;
@@ -28,8 +29,34 @@ public class Cliente {
         }
     }
 
+    public void notificarDevolucion(Alquiler unAlquiler){
+
+        String mensaje = "Mañana " + unAlquiler.getFechaDeDevolucion() + " tienes que devolver los juegos " + unAlquiler.juegosAlquilados + ", Saludos!! :)";
+
+        this.serNotificado(mensaje);
+
+    }
+
 
     public boolean tieneUsuario(Usuario unUsuario) {
         return usuario.mismoUsuarioOEmail(unUsuario.getNombreUsuario());
+    }
+
+    public boolean tieneQueDevolver() {//Si alguno de sus alquileres se entrega maniana
+
+        return alquileres.stream().anyMatch(alquiler -> alquiler.faltaUnDia());
+
+    }
+
+    public void avisarDevolucion() {
+
+        List<Alquiler>alquileresPorVencer = alquileres.stream().filter(alquiler -> alquiler.faltaUnDia()).collect(Collectors.toList());
+
+        alquileresPorVencer.forEach(alquiler -> this.notificarDevolucion(alquiler));
+
+    }
+
+    public void addAlquiler(Alquiler unAlquiler) {
+        alquileres.add(unAlquiler);
     }
 }

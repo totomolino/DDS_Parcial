@@ -2,7 +2,6 @@ package Business.Views;
 
 import Business.Alquiler;
 import Business.Cliente;
-import Business.JuegoSimple;
 import Business.Usuario;
 import Notificaciones.EMAIL;
 import Notificaciones.SMS;
@@ -10,7 +9,6 @@ import Notificaciones.WHATSAPP;
 import Notificaciones.notificarStrategy;
 import Sistema.Sistema;
 
-import java.io.IOException;
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -101,7 +99,7 @@ public class menu {
                 switch (opcion) {
 
                     case 1:
-                        this.alquilarJuegos(); //Todo falta agrerar el alquiler al cliente
+                        clienteIniciado.addAlquiler(this.alquilarJuegos()); //Todo falta agrerar el alquiler al cliente
                         break;
                     case 2:
                         clienteIniciado = null;
@@ -126,7 +124,7 @@ public class menu {
 
     }
 
-    private void alquilarJuegos() {
+    private Alquiler alquilarJuegos() {
         Scanner str = new Scanner(System.in);
         System.out.println("Has seleccionado alquilar juegos");
         List<String> juegosDisponibles = miSistema.mostrarJuegosDisponibles();
@@ -147,7 +145,8 @@ public class menu {
         String dias = str.nextLine();
         Alquiler unAlquiler = miSistema.crearAlquiler(titulos,Integer.parseInt(dias));
         //titulos.forEach(juego -> System.out.println(juego));
-        System.out.println("Usted ha alquilado el/los juego/s " + titulos + ", tiene que devolverlos el dia " + unAlquiler.getFechaDeEntrega() + " ,Gracias por elegirnos!!");
+        System.out.println("Usted ha alquilado el/los juego/s " + titulos + ", tiene que devolverlos el dia " + unAlquiler.getFechaDeDevolucion() + " ,Gracias por elegirnos!!");
+        return unAlquiler;
 
     }
 
