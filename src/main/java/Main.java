@@ -11,7 +11,7 @@ import static org.quartz.TriggerBuilder.newTrigger;
 
 public class Main {
 
-
+    private static menu unMenu = new menu();
 
     public static void main(String[] args) throws IOException, SchedulerException {
 
@@ -31,8 +31,6 @@ public class Main {
                 //.withSchedule(simpleSchedule().withIntervalInSeconds(15).repeatForever())
 
         scheduler.scheduleJob(job, trigger);
-
-        menu unMenu = new menu();
 
         unMenu.iniciarMenu();
 
