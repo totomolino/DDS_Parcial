@@ -1,10 +1,11 @@
 package Business;
 
+import java.io.IOException;
 import java.util.List;
 
 public abstract class Component {
 
-    public abstract double calcularPrecio();
+    public abstract double calcularPrecio() throws IOException;
 
     public abstract void serAlquilado();
 

@@ -1,5 +1,7 @@
 package Business;
 
+import java.io.IOException;
+
 public abstract class Condicion {
 
     public JuegoSimple juegoSimple;
@@ -8,7 +10,7 @@ public abstract class Condicion {
         this.juegoSimple = juego;
     }
 
-    public abstract double pagar();
+    public abstract double pagar() throws IOException;
 
     public JuegoSimple getJuegoSimple() {
         return juegoSimple;

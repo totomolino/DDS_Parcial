@@ -9,6 +9,7 @@ import Notificaciones.WHATSAPP;
 import Notificaciones.notificarStrategy;
 import Sistema.Sistema;
 
+import java.io.IOException;
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -63,7 +64,7 @@ public class menu {
                     default:
                         System.out.println("Solo números entre 1 y 3");
                 }
-            } catch (InputMismatchException e) {
+            } catch (InputMismatchException | IOException e) {
                 System.out.println("Debes insertar un número");
                 sn.next();
             }
@@ -115,7 +116,7 @@ public class menu {
                     default:
                         System.out.println("Solo números entre 1 y 4");
                 }
-            } catch (InputMismatchException e) {
+            } catch (InputMismatchException | IOException e) {
                 System.out.println("Debes insertar un número");
                 sn.next();
             }
@@ -124,7 +125,7 @@ public class menu {
 
     }
 
-    private Alquiler alquilarJuegos() {
+    private Alquiler alquilarJuegos() throws IOException {
         Scanner str = new Scanner(System.in);
         System.out.println("Has seleccionado alquilar juegos");
         List<String> juegosDisponibles = miSistema.mostrarJuegosDisponibles();
@@ -145,7 +146,8 @@ public class menu {
         String dias = str.nextLine();
         Alquiler unAlquiler = miSistema.crearAlquiler(titulos,Integer.parseInt(dias));
         //titulos.forEach(juego -> System.out.println(juego));
-        System.out.println("Usted ha alquilado el/los juego/s " + titulos + ", tiene que devolverlos el dia " + unAlquiler.getFechaDeDevolucion() + " ,Gracias por elegirnos!!");
+        float precio = (float) unAlquiler.calcularPrecio();
+        System.out.println("Usted ha alquilado el/los juego/s " + titulos + " por $" + precio + ", tiene que devolverlos el dia " + unAlquiler.getFechaDeDevolucion() + " ,Gracias por elegirnos!!");
         return unAlquiler;
 
     }

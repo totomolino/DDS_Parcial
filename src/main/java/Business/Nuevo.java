@@ -1,5 +1,7 @@
 package Business;
 
+import java.io.IOException;
+
 public class Nuevo extends Condicion {
 
 
@@ -8,7 +10,7 @@ public class Nuevo extends Condicion {
     }
 
     @Override
-    public double pagar() {
+    public double pagar() throws IOException {
         //Le pido a la api el precio
         double precio = juegoSimple.pedirPrecio();
 

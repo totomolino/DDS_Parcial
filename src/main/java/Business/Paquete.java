@@ -1,5 +1,6 @@
 package Business;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Stream;
@@ -10,7 +11,14 @@ public class Paquete extends Component {
 
     @Override
     public double calcularPrecio() {
-        Stream<Double> precios  = juegos.stream().map(component -> component.calcularPrecio());
+        Stream<Double> precios  = juegos.stream().map(component -> {
+            try {
+                return component.calcularPrecio();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            return null;
+        });
         return precios.mapToDouble(Double::doubleValue).sum();
     }
 

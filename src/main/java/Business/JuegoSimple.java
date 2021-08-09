@@ -1,5 +1,8 @@
 package Business;
 
+import Business.Services.Api.apiGames;
+
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -20,7 +23,7 @@ public class JuegoSimple extends Component {
     }
 
     @Override
-    public double calcularPrecio(){
+    public double calcularPrecio() throws IOException {
         return condicion.pagar();
     }
 
@@ -58,7 +61,9 @@ public class JuegoSimple extends Component {
         this.cantUsos += 1;
     }
 
-    public double pedirPrecio() {//ACA LE PIDO A LA API EL PRECIO
-        return 0;
+    public double pedirPrecio() throws IOException {//ACA LE PIDO A LA API EL PRECIO
+        apiGames api = apiGames.getInstacia();
+        return api.damePrecio(titulo);
+
     }
 }

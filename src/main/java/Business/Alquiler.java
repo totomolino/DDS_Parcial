@@ -1,5 +1,6 @@
 package Business;
 
+import java.io.IOException;
 import java.time.LocalDate;
 import java.util.List;
 
@@ -27,5 +28,9 @@ public class Alquiler {
        List<String> titulos = juegosAlquilados.mostrar();
        String titulosFinales = String.join(", ",titulos);
         return titulosFinales;
+    }
+
+    public double calcularPrecio() throws IOException {
+        return juegosAlquilados.calcularPrecio();
     }
 }
