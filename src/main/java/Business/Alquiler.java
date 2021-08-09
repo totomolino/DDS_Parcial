@@ -33,4 +33,14 @@ public class Alquiler {
     public double calcularPrecio() throws IOException {
         return juegosAlquilados.calcularPrecio();
     }
+
+    public void mostrarAlquiler() {
+
+        String estado = "OKAY";
+        if(LocalDate.now().isAfter(fechaDeDevolucion))estado = "RETRASADO";
+
+        System.out.println("fecha de retiro: " + fechaDeRetiro + " || fecha de devolucion: " + fechaDeDevolucion + " || juegos alquilados: " + this.mostrarJuegosAlquilados() + " || estado: " + estado);
+
+
+    }
 }

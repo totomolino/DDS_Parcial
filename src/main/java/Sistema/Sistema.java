@@ -20,13 +20,18 @@ public class Sistema {
 
     private static Sistema instancia = null;
     public static List<JuegoSimple> juegos;
-   // public static List<Usuario> usuarios = new ArrayList<>();
-   // public static List<Cliente> clientes = new ArrayList<Cliente>();
+    public static List<Usuario> usuarios = new ArrayList<>();
+    public static List<Cliente> clientes = new ArrayList<Cliente>();
     public static Usuario totoUser = new Usuario("totomolino","Totoeslaonda12", "totomolino@hotmail.com");
     static List<notificarStrategy>medios = Arrays.asList(new SMS());
     public static Cliente toto = new Cliente("tomas", "Molino", totoUser, "+541166070996", medios);
-    public static List<Usuario> usuarios = Arrays.asList(totoUser);
-    public static List<Cliente> clientes = Arrays.asList(toto);
+    {{
+        //HARDCODEO MI USER Y CLIENTE
+        usuarios.add(totoUser);
+        clientes.add(toto);
+    }}
+    //public static List<Usuario> usuarios = Arrays.asList(totoUser);
+    //public static List<Cliente> clientes = Arrays.asList(toto);
 
 
     //SINGLETON
@@ -35,6 +40,7 @@ public class Sistema {
         if(instancia == null){
             instancia = new Sistema();
         }
+
         return instancia;
     }
 

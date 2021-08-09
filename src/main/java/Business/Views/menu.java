@@ -87,8 +87,9 @@ public class menu {
 
             //System.out.println("1. alquilar juegos");
             System.out.println("1. alquilar juegos");
-            System.out.println("2. cerrar sesion");
-            System.out.println("3. mostrar usuarios");
+            System.out.println("2. mis alquileres");
+            System.out.println("3. cerrar sesion");
+            System.out.println("4. mostrar usuarios");
             System.out.println("99. Salir");
 
 
@@ -103,11 +104,14 @@ public class menu {
                         clienteIniciado.addAlquiler(this.alquilarJuegos()); //Todo falta agrerar el alquiler al cliente
                         break;
                     case 2:
+                        clienteIniciado.mostrarAlquileres();
+                        break;
+                    case 3:
                         clienteIniciado = null;
                         System.out.println("Se ha cerrado la sesion correctamente");
                         iniciarMenu();
                         break;
-                    case 3:
+                    case 4:
                         Sistema.mostrarUsuarios();
                         break;
                     case 99:

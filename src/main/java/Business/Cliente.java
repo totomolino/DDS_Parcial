@@ -59,4 +59,10 @@ public class Cliente {
     public void addAlquiler(Alquiler unAlquiler) {
         alquileres.add(unAlquiler);
     }
+
+    public void mostrarAlquileres() {
+
+        alquileres.forEach(alquiler -> alquiler.mostrarAlquiler());
+
+    }
 }
