@@ -1,5 +1,8 @@
 package Business;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class JuegoSimple extends Component {
 
     String titulo;
@@ -37,8 +40,10 @@ public class JuegoSimple extends Component {
     }
 
     @Override
-    public String mostrar() {
-        return titulo;
+    public List<String> mostrar() {
+        List<String> lista = new ArrayList<String>();
+        lista.add(titulo);
+        return lista;
     }
 
     public void cambiarCondicion(Condicion condicion){

@@ -26,7 +26,7 @@ public class twilio {
                 mensaje
         ).create();
 
-        System.out.println(message.getSid());
+        //System.out.println(message.getSid());
     }
 
     public static void mandarEmail(String email, String mensaje){
@@ -43,7 +43,7 @@ public class twilio {
                         mensaje)
                 .create();
 
-        System.out.println(message.getSid());
+        //System.out.println(message.getSid());
     }
 
 

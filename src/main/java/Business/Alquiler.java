@@ -24,6 +24,8 @@ public class Alquiler {
     }
 
     public String mostrarJuegosAlquilados() {
-        List<String> titulos = juegosAlquilados.mostrar();
+       List<String> titulos = juegosAlquilados.mostrar();
+       String titulosFinales = String.join(", ",titulos);
+        return titulosFinales;
     }
 }

@@ -1,5 +1,7 @@
 package Business;
 
+import java.util.List;
+
 public abstract class Component {
 
     public abstract double calcularPrecio();
@@ -10,6 +12,7 @@ public abstract class Component {
 
     public abstract void serRetrasado();
 
-    public abstract String mostrar();
+    public abstract List<String> mostrar();
+
 
 }

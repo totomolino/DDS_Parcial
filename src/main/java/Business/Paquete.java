@@ -30,8 +30,10 @@ public class Paquete extends Component {
     }
 
     @Override
-    public String mostrar() {
-        return juegos.forEach(component -> component.mostrar());
+    public List<String> mostrar() {
+        List<String> listaFinal = new ArrayList<>();
+        juegos.forEach(component -> listaFinal.addAll(component.mostrar()));
+        return listaFinal;
     }
 
     public void add(Component unComponente){
