@@ -79,7 +79,6 @@ public class JuegoDAO {
             System.out.println("Error en Update");
             return false;
         }
-
     }
 
     public boolean delete(int idPersona) {
