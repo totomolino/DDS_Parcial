@@ -3,6 +3,7 @@ import Sistema.Sistema;
 import org.quartz.*;
 import org.quartz.impl.StdSchedulerFactory;
 
+
 import java.io.IOException;
 
 import static org.quartz.JobBuilder.newJob;
@@ -31,6 +32,8 @@ public class Main {
                 //.withSchedule(simpleSchedule().withIntervalInHours(24).repeatForever())
 
         scheduler.scheduleJob(job, trigger);
+
+
 
         unMenu.iniciarMenu();
 
