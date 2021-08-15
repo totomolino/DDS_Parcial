@@ -7,7 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class JuegoSimple extends Component {
-
+    int id;
     String titulo;
     Estado estado;
     Condicion condicion;
@@ -15,11 +15,15 @@ public class JuegoSimple extends Component {
     //int precio;
 
 
-    public JuegoSimple(String titulo, Estado estado) {
+    public JuegoSimple(String titulo, Estado estado, String condicion, int cantUsos, int id) {
         this.titulo = titulo;
         this.estado = estado;
-        this.condicion = new Nuevo(this);//Se crea en nuevo
-        this.cantUsos = 0;//0 usos
+
+        if(condicion.equalsIgnoreCase("Nuevo"))this.condicion = new Nuevo(this);//Se crea en nuevo
+        else this.condicion = new Gastado(this);//Se crea en Gastado
+
+        this.cantUsos = cantUsos;
+        this.id = id;
     }
 
     @Override
@@ -65,5 +69,25 @@ public class JuegoSimple extends Component {
         apiGames api = apiGames.getInstacia();
         return api.damePrecio(titulo);
 
+    }
+
+    public void setTitulo(String titulo) {
+        this.titulo = titulo;
+    }
+
+    public void setEstado(Estado estado) {
+        this.estado = estado;
+    }
+
+    public void setCondicion(Condicion condicion) {
+        this.condicion = condicion;
+    }
+
+    public void setCantUsos(int cantUsos) {
+        this.cantUsos = cantUsos;
+    }
+
+    public String getTitulo() {
+        return titulo;
     }
 }

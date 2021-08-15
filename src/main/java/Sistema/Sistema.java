@@ -4,12 +4,7 @@ import Business.*;
 import Notificaciones.SMS;
 import Notificaciones.notificarStrategy;
 import Seguridad.Register;
-import org.quartz.Scheduler;
-import org.quartz.SchedulerException;
-import org.quartz.SchedulerFactory;
-import org.quartz.impl.StdSchedulerFactory;
 
-import java.lang.reflect.Array;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -62,12 +57,9 @@ public class Sistema {
         return Register.validarContrasenia(contrasenia, usuario);
     }
 
-    public List<String> mostrarJuegosDisponibles(){//Pide a la BD los juegos disponibles y los guarda en una lista para mostrar despues
-        List<String>juegos = new ArrayList<>();
-        juegos.add("MARVELSAVENGERS");
-        juegos.add("BATTLEFIELD4");
-        juegos.add("FIFA22");
-        juegos.add("FIFA21");
+    public List<JuegoSimple> dameJuegosDisponibles(){//Pide a la BD los juegos disponibles y los guarda en una lista para mostrar despues
+        juegosDAO juegosDAO = new juegosDAO();
+        List<JuegoSimple> juegos = juegosDAO.selectTodosLosJuegosStock();
         return juegos;
     }
 
@@ -80,10 +72,10 @@ public class Sistema {
     public Alquiler crearAlquiler(List<String>juegosTitulos, int cantDias){
         Component componente;
         if(juegosTitulos.size() == 1){ //Si cargo un solo juego
-            componente = new JuegoSimple(juegosTitulos.get(0), Estado.PRESTADO);
+            componente = new JuegoSimple(juegosTitulos.get(0), Estado.PRESTADO, "Nuevo", 0, 0);
         }else{
             componente = new Paquete();
-            juegosTitulos.forEach(juego -> ((Paquete) componente).add(new JuegoSimple(juego,Estado.PRESTADO)));
+            juegosTitulos.forEach(juego -> ((Paquete) componente).add(new JuegoSimple(juego,Estado.PRESTADO, "Nuevo", 0, 0)));
         }
         Alquiler unAlquiler = new Alquiler(LocalDate.now(), LocalDate.now().plusDays(cantDias), componente);
 
@@ -133,5 +125,14 @@ public class Sistema {
         clientesPorDevolver.forEach(cliente -> cliente.avisarDevolucion());
 
 
+    }
+
+    public List<String> mostrarJuegosDisponibles() {
+
+        List<JuegoSimple> juegos = this.dameJuegosDisponibles();
+
+        List<String> titulos = juegos.stream().map(juego -> juego.getTitulo()).collect(Collectors.toList());
+
+        return titulos;
     }
 }

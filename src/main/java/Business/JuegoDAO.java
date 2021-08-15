@@ -2,31 +2,13 @@ package Business;
 
 import java.sql.*;
 
+import static Business.Conexion.newConnection;
+
 public class JuegoDAO {
 
     private Connection conn;
 
-    public Connection newConnection(){
-        Connection conn = null;
-        try{
-            String connectionUrl = "jdbc:mysql://localhost:3306/juegos";
-            conn = DriverManager.getConnection(connectionUrl, "root", "");
 
-            //hacer algo
-            //System.out.println("Conexion realizada");
-
-            return conn;
-
-        }catch (SQLException ex){
-
-            // handle any errors
-            System.out.println("SQLException: " + ex.getMessage());
-            System.out.println("SQLState: " + ex.getSQLState());
-            System.out.println("VendorError: " + ex.getErrorCode());
-            return null;
-
-        }
-    }
 
     public int insert(String nombre, int edad) {
         String consulta = "INSERT INTO persona (nombre, edad) VALUES ('" + nombre + "'," + edad + ");";
@@ -58,8 +40,8 @@ public class JuegoDAO {
 
     }
 
-    public boolean updateActivo(int idPersona) {
-        String consulta = "UPDATE persona SET activo = 0 WHERE id = " + idPersona + ";";
+    public boolean updateActivo(int idJuego) {
+        String consulta = "UPDATE juegoSimple SET activo = 0 WHERE id_juegoSimple = " + idJuego + ";";
 
         try {
 
