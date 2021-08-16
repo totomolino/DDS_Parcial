@@ -84,6 +84,7 @@ public class Sistema {
 
     public Alquiler crearAlquiler(List<JuegoSimple>juegosTitulos, int cantDias){
          Alquiler unAlquiler;
+         juegosTitulos.forEach(juegoSimple -> juegoSimple.serAlquilado());
         if(juegosTitulos.size() == 1){ //Si cargo un solo juego
             Component componente = juegosTitulos.get(0);
             unAlquiler = new Alquiler(LocalDate.now(), LocalDate.now().plusDays(cantDias), componente);

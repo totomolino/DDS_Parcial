@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class JuegoSimple implements Component {
+
     int id;
     String titulo;
     Estado estado;
@@ -62,6 +63,8 @@ public class JuegoSimple implements Component {
 
     public void cambiarEstado(Estado estado){
         this.estado = estado;
+        JuegoDAO juegoDAO = new JuegoDAO();
+        juegoDAO.cambiarEstado(id, estado);
     }
 
     public void usar() {

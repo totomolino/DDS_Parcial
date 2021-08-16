@@ -11,15 +11,15 @@ public class JuegoDAO {
 
 
 
-    public boolean alquilarJuego(int idJuego, Estado estado) {
+    public boolean cambiarEstado(int idJuego, Estado estado) {
 
         String nuevoEstado = null;
 
-        if(estado == Estado.PRESTADO) nuevoEstado = "PRESTADO";
-        if(estado == Estado.STOCK) nuevoEstado = "STOCK";
-        if(estado == Estado.RETRASADO) nuevoEstado = "RETRASADO";
+        if(estado.equals(Estado.PRESTADO)) nuevoEstado = "PRESTADO";
+        if(estado.equals(Estado.STOCK)) nuevoEstado = "STOCK";
+        if(estado.equals(Estado.RETRASADO)) nuevoEstado = "RETRASADO";
 
-        String consulta = "UPDATE juegosimple SET estado = '" + nuevoEstado + "' WHERE id_juegoSimple = " + idJuego + ";";
+        String consulta = "UPDATE juegos.juegosimple SET estado = '" + nuevoEstado + "' WHERE id_juegoSimple = " + idJuego + ";";
 
         try {
 
