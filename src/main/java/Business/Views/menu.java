@@ -2,6 +2,7 @@ package Business.Views;
 
 import Business.Alquiler;
 import Business.Cliente;
+import Business.JuegoSimple;
 import Business.Usuario;
 import Notificaciones.EMAIL;
 import Notificaciones.SMS;
@@ -88,8 +89,9 @@ public class menu {
             //System.out.println("1. alquilar juegos");
             System.out.println("1. alquilar juegos");
             System.out.println("2. mis alquileres");
-            System.out.println("3. cerrar sesion");
-            System.out.println("4. mostrar usuarios");
+            System.out.println("3. devolver alquiler");
+            System.out.println("4. cerrar sesion");
+            System.out.println("5. mostrar usuarios");
             System.out.println("99. Salir");
 
 
@@ -107,11 +109,14 @@ public class menu {
                         clienteIniciado.mostrarAlquileres();
                         break;
                     case 3:
+                        this.devolverAlquiler();
+                        break;
+                    case 4:
                         clienteIniciado = null;
                         System.out.println("Se ha cerrado la sesion correctamente");
                         iniciarMenu();
                         break;
-                    case 4:
+                    case 5:
                         Sistema.mostrarUsuarios();
                         break;
                     case 99:
@@ -129,31 +134,56 @@ public class menu {
 
     }
 
+    private void devolverAlquiler() {
+        Scanner sc = new Scanner(System.in);
+        System.out.println("Que alquiler quiere devolver? (elegir el numero)");
+        clienteIniciado.mostrarAlquileres();
+        int indice = sc.nextInt();
+        clienteIniciado.devolverAlquiler(indice);
+        System.out.println("Listo!!, gracias por elegirnos vuelva pronto");
+
+
+    }
+
     private Alquiler alquilarJuegos() throws IOException {
         Scanner str = new Scanner(System.in);
         System.out.println("Has seleccionado alquilar juegos");
-        List<String> juegosDisponibles = miSistema.mostrarJuegosDisponibles();
+
+        List<JuegoSimple> juegosDisponibles = miSistema.dameJuegosDisponibles();
+
+        List<String> juegosDisponiblesTitulos = miSistema.dameTitulos(juegosDisponibles);
         int contador = 1;
         System.out.println("Los juegos disponibles son: ");
-        for(int i = 0; i< juegosDisponibles.size(); i++){
-            System.out.println(contador + "- " + juegosDisponibles.get(i));
+        for(int i = 0; i< juegosDisponiblesTitulos.size(); i++){
+            System.out.println(contador + "- " + juegosDisponiblesTitulos.get(i));
             contador++;
         }
         System.out.println("Ingrese el indice de el/los juegos que desee alquilar: (si quiere mas de uno, poner los numeros separados por una coma)");
         String respuesta = str.nextLine();
-        List<String>juegos = Arrays.asList(respuesta.split(","));
         int finalContador = contador - 1;
-        List<String>juegosFiltrados = juegos.stream().filter(num -> Integer.parseInt(num) <= finalContador).collect(Collectors.toList());//Para evitar errores
+        List<String> juegosFiltrados = this.seleccionarDeLista(respuesta, finalContador);
+
         List<String>titulos = new ArrayList<>();
-        juegosFiltrados.forEach(indice -> titulos.add(juegosDisponibles.get(Integer.parseInt(indice)-1)));
+        juegosFiltrados.forEach(indice -> titulos.add(juegosDisponiblesTitulos.get(Integer.parseInt(indice)-1)));
+
+        List<JuegoSimple>juegosAlquilados = new ArrayList<>();
+        juegosFiltrados.forEach(indice -> juegosAlquilados.add(juegosDisponibles.get(Integer.parseInt(indice)-1)));
+
         System.out.println("Cuantos dias quiere alquilar? ");
         String dias = str.nextLine();
-        Alquiler unAlquiler = miSistema.crearAlquiler(titulos,Integer.parseInt(dias));
+        Alquiler unAlquiler = miSistema.crearAlquiler(juegosAlquilados,Integer.parseInt(dias));
         //titulos.forEach(juego -> System.out.println(juego));
         float precio = (float) unAlquiler.calcularPrecio();
         System.out.println("Usted ha alquilado el/los juego/s " + titulos + " por $" + precio + ", tiene que devolverlos el dia " + unAlquiler.getFechaDeDevolucion() + " ,Gracias por elegirnos!!");
         return unAlquiler;
 
+    }
+
+    public List<String> seleccionarDeLista(String seleccion, int contador){
+        List<String>juegos = Arrays.asList(seleccion.split(","));
+        List<String>juegosFiltrados = juegos.stream().filter(num -> Integer.parseInt(num) <= contador).collect(Collectors.toList());//Para evitar errores
+
+        return juegosFiltrados;
     }
 
 

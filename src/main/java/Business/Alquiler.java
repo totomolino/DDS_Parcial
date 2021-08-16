@@ -34,13 +34,19 @@ public class Alquiler {
         return juegosAlquilados.calcularPrecio();
     }
 
-    public void mostrarAlquiler() {
+    public void mostrarAlquiler(int contador) {
 
         String estado = "OKAY";
         if(LocalDate.now().isAfter(fechaDeDevolucion))estado = "RETRASADO";
 
-        System.out.println("fecha de retiro: " + fechaDeRetiro + " || fecha de devolucion: " + fechaDeDevolucion + " || juegos alquilados: " + this.mostrarJuegosAlquilados() + " || estado: " + estado);
+        System.out.println(contador + "- " + "fecha de retiro: " + fechaDeRetiro + " || fecha de devolucion: " + fechaDeDevolucion + " || juegos alquilados: " + this.mostrarJuegosAlquilados() + " || estado: " + estado);
 
+        contador++;
+
+    }
+
+    public void serDevuelto() {
+        juegosAlquilados.serDevuelto();
 
     }
 }

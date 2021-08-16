@@ -68,8 +68,8 @@ public class Sistema {
         usuarios.add(unUsuario);
         return unUsuario;
     }
-
-    public Alquiler crearAlquiler(List<String>juegosTitulos, int cantDias){
+/*
+    public Alquiler crearAlquilerViejo(List<String>juegosTitulos, int cantDias){
         Component componente;
         if(juegosTitulos.size() == 1){ //Si cargo un solo juego
             componente = new JuegoSimple(juegosTitulos.get(0), Estado.PRESTADO, "Nuevo", 0, 0);
@@ -78,6 +78,20 @@ public class Sistema {
             juegosTitulos.forEach(juego -> ((Paquete) componente).add(new JuegoSimple(juego,Estado.PRESTADO, "Nuevo", 0, 0)));
         }
         Alquiler unAlquiler = new Alquiler(LocalDate.now(), LocalDate.now().plusDays(cantDias), componente);
+
+        return unAlquiler;
+    }*/
+
+    public Alquiler crearAlquiler(List<JuegoSimple>juegosTitulos, int cantDias){
+         Alquiler unAlquiler;
+        if(juegosTitulos.size() == 1){ //Si cargo un solo juego
+            Component componente = juegosTitulos.get(0);
+            unAlquiler = new Alquiler(LocalDate.now(), LocalDate.now().plusDays(cantDias), componente);
+        }else{
+            Paquete paquete = new Paquete();
+            juegosTitulos.forEach(juegoSimple -> paquete.add(juegoSimple));
+            unAlquiler = new Alquiler(LocalDate.now(), LocalDate.now().plusDays(cantDias), paquete);
+        }
 
         return unAlquiler;
     }
@@ -127,12 +141,12 @@ public class Sistema {
 
     }
 
-    public List<String> mostrarJuegosDisponibles() {
-
-        List<JuegoSimple> juegos = this.dameJuegosDisponibles();
+    public List<String> dameTitulos(List<JuegoSimple> juegos){
 
         List<String> titulos = juegos.stream().map(juego -> juego.getTitulo()).collect(Collectors.toList());
 
         return titulos;
+
     }
+
 }

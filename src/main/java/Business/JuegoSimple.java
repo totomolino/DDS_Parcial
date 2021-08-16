@@ -6,7 +6,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class JuegoSimple extends Component {
+public class JuegoSimple implements Component {
     int id;
     String titulo;
     Estado estado;
@@ -39,6 +39,7 @@ public class JuegoSimple extends Component {
     @Override
     public void serDevuelto() {
         cambiarEstado(Estado.STOCK);
+
     }
 
     @Override
@@ -55,6 +56,8 @@ public class JuegoSimple extends Component {
 
     public void cambiarCondicion(Condicion condicion){
         this.condicion = condicion;
+        JuegoDAO juegoDAO = new JuegoDAO();
+        juegoDAO.gastarJuego(id);
     }
 
     public void cambiarEstado(Estado estado){
@@ -63,6 +66,8 @@ public class JuegoSimple extends Component {
 
     public void usar() {
         this.cantUsos += 1;
+        JuegoDAO juegoDAO = new JuegoDAO();
+        juegoDAO.usarJuego(id, cantUsos);
     }
 
     public double pedirPrecio() throws IOException {//ACA LE PIDO A LA API EL PRECIO
@@ -73,10 +78,6 @@ public class JuegoSimple extends Component {
 
     public void setTitulo(String titulo) {
         this.titulo = titulo;
-    }
-
-    public void setEstado(Estado estado) {
-        this.estado = estado;
     }
 
     public void setCondicion(Condicion condicion) {

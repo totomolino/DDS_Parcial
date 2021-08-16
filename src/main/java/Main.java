@@ -37,7 +37,7 @@ public class Main {
 
         unMenu.iniciarMenu();
 
-       // scheduler.shutdown();
+        scheduler.shutdown();
     }
 
 

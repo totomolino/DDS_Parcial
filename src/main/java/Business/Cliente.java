@@ -62,7 +62,19 @@ public class Cliente {
 
     public void mostrarAlquileres() {
 
-        alquileres.forEach(alquiler -> alquiler.mostrarAlquiler());
+        for(int contador = 1 ; contador <= alquileres.size(); contador++){
+            Alquiler unAlquiler = alquileres.get(contador-1);
+            unAlquiler.mostrarAlquiler(contador);
+        }
+
+
 
     }
+
+    public void devolverAlquiler(int indice){
+        Alquiler unAlquiler = alquileres.remove(indice-1);
+        unAlquiler.serDevuelto();
+
+    }
+
 }

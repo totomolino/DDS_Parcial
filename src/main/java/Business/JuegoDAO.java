@@ -10,38 +10,16 @@ public class JuegoDAO {
 
 
 
-    public int insert(String nombre, int edad) {
-        String consulta = "INSERT INTO persona (nombre, edad) VALUES ('" + nombre + "'," + edad + ");";
 
-        try {
+    public boolean alquilarJuego(int idJuego, Estado estado) {
 
-            this.conn = newConnection();
+        String nuevoEstado = null;
 
-            // Ejecución
-            PreparedStatement stmt = this.conn.prepareStatement(consulta, Statement.RETURN_GENERATED_KEYS);
+        if(estado == Estado.PRESTADO) nuevoEstado = "PRESTADO";
+        if(estado == Estado.STOCK) nuevoEstado = "STOCK";
+        if(estado == Estado.RETRASADO) nuevoEstado = "RETRASADO";
 
-            // execute the preparedstatement
-            stmt.executeUpdate();
-
-            // obtener último id generado
-            ResultSet generatedKeys = stmt.getGeneratedKeys();
-            if (generatedKeys.next())
-                return generatedKeys.getInt(1);
-            else
-                return 0;
-
-
-        } catch (SQLException ex) {
-
-            // handle any errors
-            System.out.println("Error en Insert");
-            return 0;
-        }
-
-    }
-
-    public boolean updateActivo(int idJuego) {
-        String consulta = "UPDATE juegoSimple SET activo = 0 WHERE id_juegoSimple = " + idJuego + ";";
+        String consulta = "UPDATE juegosimple SET estado = '" + nuevoEstado + "' WHERE id_juegoSimple = " + idJuego + ";";
 
         try {
 
@@ -63,8 +41,9 @@ public class JuegoDAO {
         }
     }
 
-    public boolean delete(int idPersona) {
-        String consulta = "DELETE FROM persona WHERE id = " + idPersona + ";";
+
+    public boolean usarJuego(int idJuego, int cantUsos) {
+        String consulta = "UPDATE juegosimple SET cantUsos = " + cantUsos + " WHERE id_juegoSimple = " + idJuego + ";";
 
         try {
 
@@ -74,18 +53,43 @@ public class JuegoDAO {
             PreparedStatement stmt = this.conn.prepareStatement(consulta);
 
             // execute the preparedstatement
-            stmt.execute();
+            stmt.executeUpdate();
             return true;
+
 
         } catch (SQLException ex) {
 
             // handle any errors
-            System.out.println("Error en Delete");
+            System.out.println("Error en Update");
             return false;
         }
 
     }
 
+    public boolean gastarJuego(int idJuego) {
+
+        String consulta = "UPDATE juegosimple SET condicion = 'Gastado' WHERE id_juegoSimple = " + idJuego + ";";
+
+        try {
+
+            this.conn = newConnection();
+
+            // Ejecución
+            PreparedStatement stmt = this.conn.prepareStatement(consulta);
+
+            // execute the preparedstatement
+            stmt.executeUpdate();
+            return true;
+
+
+        } catch (SQLException ex) {
+
+            // handle any errors
+            System.out.println("Error en Update");
+            return false;
+        }
+
+    }
 }
 
 
