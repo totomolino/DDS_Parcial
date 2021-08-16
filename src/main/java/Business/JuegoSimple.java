@@ -67,7 +67,7 @@ public class JuegoSimple implements Component {
         juegoDAO.cambiarEstado(id, estado);
     }
 
-    public void usar() {
+    public void serUsado() {
         this.cantUsos += 1;
         JuegoDAO juegoDAO = new JuegoDAO();
         juegoDAO.usarJuego(id, cantUsos);
@@ -77,18 +77,6 @@ public class JuegoSimple implements Component {
         apiGames api = apiGames.getInstacia();
         return api.damePrecio(titulo);
 
-    }
-
-    public void setTitulo(String titulo) {
-        this.titulo = titulo;
-    }
-
-    public void setCondicion(Condicion condicion) {
-        this.condicion = condicion;
-    }
-
-    public void setCantUsos(int cantUsos) {
-        this.cantUsos = cantUsos;
     }
 
     public String getTitulo() {

@@ -14,7 +14,7 @@ public class Nuevo extends Condicion {
         //Le pido a la api el precio
         double precio = juegoSimple.pedirPrecio();
 
-        juegoSimple.usar();
+        juegoSimple.serUsado();
 
         if(juegoSimple.cantUsos == 4){
             juegoSimple.cambiarCondicion(new Gastado(juegoSimple));
