@@ -20,13 +20,12 @@ public class Sistema {
     public static Usuario totoUser = new Usuario("totomolino","Totoeslaonda12", "totomolino@hotmail.com");
     static List<notificarStrategy>medios = Arrays.asList(new SMS());
     public static Cliente toto = new Cliente("tomas", "Molino", totoUser, "+541166070996", medios);
-    {{
+    {
         //HARDCODEO MI USER Y CLIENTE
         usuarios.add(totoUser);
         clientes.add(toto);
-    }}
-    //public static List<Usuario> usuarios = Arrays.asList(totoUser);
-    //public static List<Cliente> clientes = Arrays.asList(toto);
+    }
+
 
 
     //SINGLETON

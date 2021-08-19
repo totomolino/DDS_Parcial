@@ -70,7 +70,7 @@ public class menu {
                 sn.next();
             }
         }
-        System.out.println("Finalizado con exito! Nos vemos broustoun!");
+        System.out.println("Hasta la proxima!");
 
 
     }
