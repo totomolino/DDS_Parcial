@@ -68,15 +68,15 @@ public class Sistema {
         return unUsuario;
     }
 
-    public Alquiler crearAlquiler(List<JuegoSimple>juegosTitulos, int cantDias){
+    public Alquiler crearAlquiler(List<Component>juegosTitulos, int cantDias){
          Alquiler unAlquiler;
          juegosTitulos.forEach(juegoSimple -> juegoSimple.serAlquilado());
-        if(juegosTitulos.size() == 1){ //Si cargo un solo juego
-            Component componente = juegosTitulos.get(0);
+        if(juegosTitulos.size() == 1){
+            Component componente = juegosTitulos.get(0); //puede ser un solo paquete o un solo juego
             unAlquiler = new Alquiler(LocalDate.now(), LocalDate.now().plusDays(cantDias), componente);
         }else{
             Paquete paquete = new Paquete();
-            juegosTitulos.forEach(juegoSimple -> paquete.add(juegoSimple));
+            juegosTitulos.forEach(juegoSimple -> paquete.add(juegoSimple)); //armo un paquete con lo que podria ser juegos o paquetes o juegos y paquetes
             unAlquiler = new Alquiler(LocalDate.now(), LocalDate.now().plusDays(cantDias), paquete);
         }
 

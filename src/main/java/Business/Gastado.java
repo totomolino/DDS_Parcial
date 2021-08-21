@@ -13,7 +13,7 @@ public class Gastado extends Condicion{
 
         double precio = juegoSimple.pedirPrecio();
 
-        double precioFinal = (precio - (precio*0.1));//podriamos poner el maximo entre este y 0 asi no da negativo
+        double precioFinal = (precio - (precio*0.1));
 
         return precioFinal;
     }
