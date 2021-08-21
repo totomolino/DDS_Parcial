@@ -67,19 +67,6 @@ public class Sistema {
         usuarios.add(unUsuario);
         return unUsuario;
     }
-/*
-    public Alquiler crearAlquilerViejo(List<String>juegosTitulos, int cantDias){
-        Component componente;
-        if(juegosTitulos.size() == 1){ //Si cargo un solo juego
-            componente = new JuegoSimple(juegosTitulos.get(0), Estado.PRESTADO, "Nuevo", 0, 0);
-        }else{
-            componente = new Paquete();
-            juegosTitulos.forEach(juego -> ((Paquete) componente).add(new JuegoSimple(juego,Estado.PRESTADO, "Nuevo", 0, 0)));
-        }
-        Alquiler unAlquiler = new Alquiler(LocalDate.now(), LocalDate.now().plusDays(cantDias), componente);
-
-        return unAlquiler;
-    }*/
 
     public Alquiler crearAlquiler(List<JuegoSimple>juegosTitulos, int cantDias){
          Alquiler unAlquiler;
